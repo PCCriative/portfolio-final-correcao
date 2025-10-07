@@ -256,28 +256,17 @@ header nav a {
 }
 /* --- FIM DOS AJUSTES --- */
 
-/* --- OVERRIDE FINAL EXTREMO (Ajuste Final de Layout) --- */
-
-/* Força a exibição LADO A LADO no Sobre Mim */
-.sobre-container .photo-grid {
-    display: flex !important;
-    flex-direction: row !important;
-    flex-wrap: wrap !important;
-    justify-content: center !important;
-}
-.sobre-container .photo-grid a {
-    flex-basis: calc(50% - 15px) !important;
-    max-width: 400px !important;
-}
-
-/* Garante o tamanho correto final do Carrossel e impede distorção */
+/* Correção do Carrossel: Usando altura flexível para impedir distorção */
 .carousel-inner {
-    height: 420px !important;
+    /* Removendo height: 420px !important; para flexibilizar a altura */
+    height: auto !important; /* Permite que o conteúdo defina a altura */
+    max-height: 480px !important; /* Limite máximo para não ficar gigante */
 }
 .carousel-item img {
     width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important; /* Comando forçado contra o esticamento */
+    height: auto !important; /* Permite que o CSS calcule a altura correta */
+    object-fit: contain !important; /* Comando para não distorcer a foto */
+    max-height: 480px !important;
 }
 
 /* --- FIM DO OVERRIDE --- */
