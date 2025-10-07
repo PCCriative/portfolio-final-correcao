@@ -281,5 +281,9 @@ header nav a {
     border: 3px solid #d4af37 !important; 
     box-sizing: border-box !important;
 }
+/* FORÇA FINAL: BORDA NA IMAGEM GRANDE DO LIGHTBOX */
+.lb-image {
+    border: 3px solid #d4af37 !important;
+}
 
 /* --- FIM DO OVERRIDE --- */
