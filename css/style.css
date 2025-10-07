@@ -255,3 +255,27 @@ header nav a {
     max-width: 100% !important;
 }
 /* --- FIM DOS AJUSTES --- */
+
+/* --- OVERRIDE FINAL EXTREMO (Ajuste Final de Layout) --- */
+
+/* Força a exibição LADO A LADO no Sobre Mim */
+.sobre-container .photo-grid {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+}
+.sobre-container .photo-grid a {
+    flex-basis: calc(50% - 15px) !important;
+    max-width: 400px !important;
+}
+
+/* Garante o tamanho correto final do Carrossel */
+.carousel-inner {
+    height: 420px !important;
+}
+.carousel-item img {
+    height: 100% !important;
+    object-fit: cover !important;
+}
+/* --- FIM DO OVERRIDE --- */
