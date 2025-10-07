@@ -269,4 +269,12 @@ header nav a {
     max-height: 480px !important;
 }
 
+/* BORDA OURO FINAL E DEFINITIVA */
+/* Aplica a borda a todos os cartões de álbum e todas as fotos de grade, com força total. */
+.album-card img, 
+.photo-grid img, 
+.album-grid-images img {
+    border: 2px solid #d4af37 !important; 
+}
+
 /* --- FIM DO OVERRIDE --- */
