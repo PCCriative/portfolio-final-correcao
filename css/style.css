@@ -224,3 +224,34 @@ header nav a {
         grid-template-columns: 1fr;
     }
 }
+
+/* --- ÚLTIMOS AJUSTES CIRÚRGICOS (Forçando o Layout) --- */
+
+/* 1. Corrige a cor dos títulos de categoria para cor ouro */
+.category-section h2 {
+    color: #d4af37 !important;
+}
+
+/* 2. Corrige o Carrossel (altura e tamanho da imagem) */
+.carousel-inner {
+    height: 420px !important;
+}
+.carousel-item img {
+    height: 100% !important;
+    object-fit: cover !important;
+}
+
+/* 3. Corrige o Layout e Tamanho do Sobre Mim (Lado a lado) */
+.sobre-container .photo-grid {
+    display: flex !important;
+    gap: 15px !important;
+}
+.sobre-container .photo-grid a {
+    flex-basis: calc(50% - 15px) !important;
+    max-width: 400px !important;
+}
+.sobre-container .photo-grid img {
+    height: auto !important;
+    max-width: 100% !important;
+}
+/* --- FIM DOS AJUSTES --- */
