@@ -270,12 +270,14 @@ header nav a {
     max-width: 400px !important;
 }
 
-/* Garante o tamanho correto final do Carrossel */
+/* Garante o tamanho correto final do Carrossel e impede distorção */
 .carousel-inner {
     height: 420px !important;
 }
 .carousel-item img {
+    width: 100% !important;
     height: 100% !important;
-    object-fit: cover !important;
+    object-fit: cover !important; /* Comando forçado contra o esticamento */
 }
+
 /* --- FIM DO OVERRIDE --- */
