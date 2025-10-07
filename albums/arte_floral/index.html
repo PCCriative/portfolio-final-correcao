@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Arte Floral | Portfólio</title>
+  <link rel="stylesheet" href="../../css/style.css">
+    
+   <style>
+    .album-grid-images {
+        display: grid; /* Usando Grid para controle de colunas */
+        /* Garante que o navegador crie 5 colunas de tamanho igual */
+        grid-template-columns: repeat(5, 1fr); 
+        gap: 15px; /* Espaçamento entre as fotos */
+        padding: 10px;
+    }
+    .album-grid-images img {
+        width: 100%;
+        height: 200px; /* Limita a altura das miniaturas */
+        object-fit: cover; /* Faz a imagem cobrir o espaco sem distorcer */
+    }
+
+    /* Regra para telas menores (como celular) */
+    @media (max-width: 768px) {
+        .album-grid-images {
+            /* Mudar para 2 colunas no celular */
+            grid-template-columns: repeat(2, 1fr); 
+        }
+    }
+</style> 
+
+</head>
+<body>
+
+  <header>
+    <div class="logo-group">
+      <a href="../../index.html"><img class="logo" src="../../assets/Logo.jpg" alt="Logo"></a>
+    </div>
+    <nav>
+      <a href="../../index.html">Portfólio</a>
+      <a href="../../sobre.html">Sobre Mim</a>
+    </nav>
+  </header>
+
+  <main class="album-page">
+    <h1 style="text-align:center;">Arte Floral</h1>
+    <section class="album-grid-images">
+    <a href="../../albums/arte_floral/arte_floral_1.jpg" data-gallery="arte_floral"><img src="../../albums/arte_floral/arte_floral_1.jpg" alt="Arte Floral - Foto 1"></a>
+    <a href="../../albums/arte_floral/arte_floral_2.jpg" data-gallery="arte_floral"><img src="../../albums/arte_floral/arte_floral_2.jpg" alt="Arte Floral - Foto 2"></a>
+    <a href="../../albums/arte_floral/arte_floral_3.jpg" data-gallery="arte_floral"><img src="../../albums/arte_floral/arte_floral_3.jpg" alt="Arte Floral - Foto 3"></a>
+    <a href="../../albums/arte_floral/arte_floral_4.jpg" data-gallery="arte_floral"><img src="../../albums/arte_floral/arte_floral_4.jpg" alt="Arte Floral - Foto 4"></a>
+    <a href="../../albums/arte_floral/arte_floral_5.jpg" data-gallery="arte_floral"><img src="../../albums/arte_floral/arte_floral_5.jpg" alt="Arte Floral - Foto 5"></a>
+    <a href="../../albums/arte_floral/arte_floral_6.jpg" data-gallery="arte_floral"><img src="../../albums/arte_floral/arte_floral_6.jpg" alt="Arte Floral - Foto 6"></a>
+    <a href="../../albums/arte_floral/arte_floral_7.jpg" data-gallery="arte_floral"><img src="../../albums/arte_floral/arte_floral_7.jpg" alt="Arte Floral - Foto 7"></a>
+    <a href="../../albums/arte_floral/arte_floral_8.jpg" data-gallery="arte_floral"><img src="../../albums/arte_floral/arte_floral_8.jpg" alt="Arte Floral - Foto 8"></a>
+    <a href="../../albums/arte_floral/arte_floral_9.jpg" data-gallery="arte_floral"><img src="../../albums/arte_floral/arte_floral_9.jpg" alt="Arte Floral - Foto 9"></a>
+    </section>
+  </main>
+  <script src="../../js/site_ui.js"></script>
+</body>
+</html>

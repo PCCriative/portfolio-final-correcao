@@ -29,30 +29,60 @@ header nav a{margin-left:20px;font-weight:bold}
 .sobre-container .photo-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px}
 .sobre-container .photo-grid img{width:100%;height:auto;object-fit:cover}
 @media (max-width: 600px) {.sobre-container .photo-grid{grid-template-columns:1fr}}
-/* --- INÍCIO DAS CORREÇÕES DE LAYOUT (PAULO) --- */
+/* --- CORREÇÃO FINAL CIRÚRGICA (Layout e Tamanho) --- */
 
-/* 1. CORRIGE O TAMANHO DAS FOTOS: 
-   Aplica uma altura máxima de 450px a todas as imagens do carrossel/galeria.
-*/
-.carousel-inner img,
-.album-photos img,
-.gallery-item img {
-    max-width: 100%;
-    height: auto;
-    max-height: 450px; /* Limite de Altura: Altere este número se quiser fotos mais baixas ou mais altas */
-    object-fit: cover;
-    margin: 0 auto;
+/* 1. CORRIGE O TAMANHO NO CARROSSEL (Seção Gigante no Topo) */
+/* Assegura que o carrossel e as imagens tenham uma altura controlada. */
+.carousel-inner {
+    height: 60vh; /* Altura do carrossel: 60% da altura da tela (Ajuste se necessário) */
+    overflow: hidden; /* Esconde o que ultrapassar */
 }
 
-/* 2. CORRIGE O ESPAÇAMENTO VAZIO (GAPS): 
-   Aplica a distribuição uniforme para que as fotos preencham a última linha.
-   Ajuste '.row-album' para a classe que envolve sua galeria, se souber qual é.
-*/
-.row-album,
-.gallery-container {
+.carousel-item img {
+    width: 100%; /* Imagem sempre 100% da largura do contêiner */
+    height: 100%; /* Imagem sempre 100% da altura do contêiner */
+    object-fit: cover; /* Recorta a imagem para preencher o espaço sem distorção */
+}
+
+/* 2. CORRIGE O ALINHAMENTO E OS ESPAÇOS VAZIOS NA GALERIA (Grid) */
+/* Usa Flexbox na classe 'albums-grid' para distribuir os álbuns uniformemente. */
+.albums-grid {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around; /* Distribui o espaço entre as fotos, preenchendo as lacunas */
+    flex-wrap: wrap; /* Permite que os cards quebrem para a linha de baixo */
+    justify-content: space-around; /* Distribui o espaço vazio de forma uniforme, eliminando o preto */
 }
 
-/* --- FIM DAS CORREÇÕES DE LAYOUT --- */
+/* 3. CORRIGE O TAMANHO DAS MINIATURAS DA GALERIA */
+/* Aplica um limite de altura às miniaturas para que não fiquem desproporcionais. */
+.album-card img {
+    max-height: 250px; /* Limite de altura das miniaturas (Ajuste se necessário) */
+    width: 100%;
+    object-fit: cover;
+}
+/* --- FIM DA CORREÇÃO FINAL --- */
+/* --- CORREÇÃO FINAL ULTRA-FORTE: LAYOUT E ALINHAMENTO --- */
+
+/* 1. CORREÇÃO DO CARROSSEL (Tamanho e Altura) */
+.carousel-inner {
+    height: 60vh !important; 
+    overflow: hidden !important;
+}
+
+.carousel-item img {
+    width: 100% !important; 
+    height: 100% !important; 
+    object-fit: cover !important;
+}
+
+/* 2. CORREÇÃO DA GALERIA (Alinhamento e Espaços Vazios) */
+.albums-grid {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: space-around !important;
+}
+
+.album-card img {
+    max-height: 250px !important;
+    width: 100% !important;
+    object-fit: cover !important;
+}
