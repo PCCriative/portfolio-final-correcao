@@ -276,5 +276,10 @@ header nav a {
 .album-grid-images img {
     border: 2px solid #d4af37 !important; 
 }
+/* FORÇA FINAL: BORDA NO CARROSSEL */
+.carousel-inner .carousel-item img {
+    border: 3px solid #d4af37 !important; 
+    box-sizing: border-box !important;
+}
 
 /* --- FIM DO OVERRIDE --- */
