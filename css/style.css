@@ -1,88 +1,234 @@
-html,body{background:#000;color:#d4af37;font-family:Arial,Helvetica,sans-serif;margin:0;padding:0}
-a{color:#d4af37;text-decoration:none}
-a:hover{color:#fff}
-header{display:flex;justify-content:space-between;align-items:center;padding:12px 18px;background:rgba(0,0,0,0.2)}
-header .logo-group{display:flex;align-items:center}
-header img.logo{width:300px;height:auto;display:block}
-header nav a{margin-left:20px;font-weight:bold}
-.albums-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;padding:0 20px 20px 20px}
-.album-card{background:rgba(255,255,255,0.02);padding:10px;border-radius:8px;text-align:center}
-.album-card img{width:100%;height:180px;object-fit:cover;border-radius:6px}
-.category-section{margin-bottom:40px;margin-top:20px}
-.category-section h2{color:#fff;margin-top:30px;padding:0 20px;border-bottom:1px solid rgba(212, 175, 55, 0.4);padding-bottom:10px}
-.carousel{width:100%;max-width:1200px;margin:20px auto;overflow:hidden;position:relative}
-.carousel-inner{display:flex;transition:transform .5s ease}
-.carousel-item{min-width:100%;box-sizing:border-box}
-.carousel img{width:100%;height:420px;object-fit:cover;display:block}
-.carousel-nav{position:absolute;top:50%;left:0;right:0;display:flex;justify-content:space-between;padding:0 10px;transform:translateY(-50%)}
-.carousel-button{background:rgba(0,0,0,0.45);color:#d4af37;border:none;font-size:1.4rem;padding:8px 12px;cursor:pointer}
-.album-grid-images{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:15px;padding:20px}
-.album-grid-images img{width:100%;height:200px;object-fit:cover;border-radius:4px;transition:transform .3s ease}
-.album-grid-images img:hover{transform:scale(1.03)}
-.lightbox{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.88);z-index:9999}
-.lightbox img{max-width:95%;max-height:90%}
-.lightbox .close{position:absolute;top:20px;right:20px;color:#d4af37;font-size:1.6rem;background:none;border:none;cursor:pointer}
-.sobre-container{max-width:900px;margin:40px auto;padding:0 20px}
-.sobre-container h1{text-align:center;color:#fff}
-.sobre-container p{line-height:1.6;margin-bottom:15px;text-align:justify}
-.sobre-container img{max-width:100%;height:auto;border-radius:8px;margin:20px 0;display:block}
-.sobre-container .photo-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px}
-.sobre-container .photo-grid img{width:100%;height:auto;object-fit:cover}
-@media (max-width: 600px) {.sobre-container .photo-grid{grid-template-columns:1fr}}
-/* --- CORREÇÃO FINAL CIRÚRGICA (Layout e Tamanho) --- */
-
-/* 1. CORRIGE O TAMANHO NO CARROSSEL (Seção Gigante no Topo) */
-/* Assegura que o carrossel e as imagens tenham uma altura controlada. */
-.carousel-inner {
-    height: 60vh; /* Altura do carrossel: 60% da altura da tela (Ajuste se necessário) */
-    overflow: hidden; /* Esconde o que ultrapassar */
+html, body {
+    background: #000;
+    color: #d4af37;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
 }
-
-.carousel-item img {
-    width: 100%; /* Imagem sempre 100% da largura do contêiner */
-    height: 100%; /* Imagem sempre 100% da altura do contêiner */
-    object-fit: cover; /* Recorta a imagem para preencher o espaço sem distorção */
+a {
+    color: #d4af37;
+    text-decoration: none;
 }
-
-/* 2. CORRIGE O ALINHAMENTO E OS ESPAÇOS VAZIOS NA GALERIA (Grid) */
-/* Usa Flexbox na classe 'albums-grid' para distribuir os álbuns uniformemente. */
-.albums-grid {
+a:hover {
+    color: #fff;
+}
+header {
     display: flex;
-    flex-wrap: wrap; /* Permite que os cards quebrem para a linha de baixo */
-    justify-content: space-around; /* Distribui o espaço vazio de forma uniforme, eliminando o preto */
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 18px;
+    background: rgba(0, 0, 0, 0.2);
+}
+header .logo-group {
+    display: flex;
+    align-items: center;
+}
+header img.logo {
+    width: 300px;
+    height: auto;
+    display: block;
+}
+header nav a {
+    margin-left: 20px;
+    font-weight: bold;
 }
 
-/* 3. CORRIGE O TAMANHO DAS MINIATURAS DA GALERIA */
-/* Aplica um limite de altura às miniaturas para que não fiquem desproporcionais. */
+/* CORREÇÃO DO LAYOUT: GALERIA DE ÁLBUNS (index.html) */
+.albums-grid {
+    display: flex; /* Mudar para Flex para controle total */
+    flex-wrap: wrap; /* Permite que os cards quebrem a linha */
+    justify-content: space-around; /* Distribui os álbuns uniformemente */
+    gap: 16px;
+    padding: 0 20px 20px 20px;
+}
+.album-card {
+    background: rgba(255, 255, 255, 0.02);
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+    flex-basis: 240px; /* Garante um tamanho base para cada card */
+}
 .album-card img {
-    max-height: 250px; /* Limite de altura das miniaturas (Ajuste se necessário) */
     width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+.category-section {
+    margin-bottom: 40px;
+    margin-top: 20px;
+}
+.category-section h2 {
+    color: #fff;
+    margin-top: 30px;
+    padding: 0 20px;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.4);
+    padding-bottom: 10px;
+}
+
+/* CORREÇÃO DO LAYOUT: CARROSSEL (index.html) */
+.carousel {
+    width: 100%;
+    max-width: 1200px;
+    margin: 20px auto;
+    overflow: hidden;
+    position: relative;
+}
+.carousel-inner {
+    display: flex;
+    transition: transform .5s ease;
+    height: 420px; /* Altura corrigida para o carrossel */
+}
+.carousel-item {
+    min-width: 100%;
+    box-sizing: border-box;
+}
+.carousel img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+.carousel-nav {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10px;
+    transform: translateY(-50%);
+}
+.carousel-button {
+    background: rgba(0, 0, 0, 0.45);
+    color: #d4af37;
+    border: none;
+    font-size: 1.4rem;
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+/* CORREÇÃO DO LAYOUT: GALERIAS DE FOTOS (Álbuns e sobre.html) */
+.photo-grid, .album-grid-images { /* Aplica as regras de grid a ambos para consistência */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; /* Espaço entre as fotos */
+    justify-content: center; /* Centraliza as fotos */
+    padding: 20px;
+}
+
+.photo-grid a, .album-grid-images a {
+    flex-basis: calc(33.333% - 10px); /* 3 fotos por linha */
+    max-width: 300px;
+    height: auto;
+}
+
+.photo-grid img, .album-grid-images img {
+    width: 100%;
+    height: 200px; /* Altura da miniatura */
+    object-fit: cover;
+    border-radius: 4px;
+    transition: transform .3s ease;
+}
+.album-grid-images img:hover {
+    transform: scale(1.03);
+}
+
+/* REGRA ESPECÍFICA PARA A PÁGINA SOBRE MIM (2 fotos por linha) */
+.sobre-container .photo-grid a {
+    flex-basis: calc(50% - 10px); /* 2 fotos por linha */
+    max-width: 400px;
+}
+.sobre-container .photo-grid img {
+    height: auto; /* Mantém a altura automática no Sobre Mim */
+}
+
+
+/* Outros Estilos */
+.lightbox {
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.88);
+    z-index: 9999;
+}
+.lightbox img {
+    max-width: 95%;
+    max-height: 90%;
+}
+.lightbox .close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: #d4af37;
+    font-size: 1.6rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+.sobre-container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+.sobre-container h1 {
+    text-align: center;
+    color: #fff;
+}
+.sobre-container p {
+    line-height: 1.6;
+    margin-bottom: 15px;
+    text-align: justify;
+}
+.sobre-container img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 20px 0;
+    display: block;
+}
+
+@media (max-width: 600px) {
+    header img.logo {
+        width: 200px;
+    }
+    header nav a {
+        margin-left: 10px;
+    }
+    .albums-grid {
+        justify-content: center;
+    }
+    .album-card {
+        flex-basis: 100%;
+    }
+    .carousel-inner {
+        height: 40vh;
+    }
+    .sobre-container .photo-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* REGRAS FINAIS PARA CORRIGIR LAYOUT E ESPACAMENTO */
+.photo-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; /* Espaço entre as fotos */
+    justify-content: center; /* Centraliza as fotos */
+    padding: 20px;
+}
+
+.photo-grid img {
+    flex-basis: calc(33.333% - 10px); /* 3 fotos por linha */
+    max-width: 300px;
+    height: auto;
     object-fit: cover;
 }
-/* --- FIM DA CORREÇÃO FINAL --- */
-/* --- CORREÇÃO FINAL ULTRA-FORTE: LAYOUT E ALINHAMENTO --- */
 
-/* 1. CORREÇÃO DO CARROSSEL (Tamanho e Altura) */
-.carousel-inner {
-    height: 60vh !important; 
-    overflow: hidden !important;
-}
-
-.carousel-item img {
-    width: 100% !important; 
-    height: 100% !important; 
-    object-fit: cover !important;
-}
-
-/* 2. CORREÇÃO DA GALERIA (Alinhamento e Espaços Vazios) */
-.albums-grid {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    justify-content: space-around !important;
-}
-
-.album-card img {
-    max-height: 250px !important;
-    width: 100% !important;
-    object-fit: cover !important;
+/* Regra para a pagina SOBRE MIM (2 fotos por linha) */
+.photo-grid img[src*="sobre"] { /* Usa o atributo 'src' para identificar as fotos do sobre.html */
+    flex-basis: calc(50% - 10px); /* 2 fotos por linha */
+    max-width: 400px;
 }
