@@ -36,7 +36,8 @@ document.addEventListener('DOMContentLoaded', function(){
         function show(i){ 
             lbImg.src = srcs[i]; 
             // Atualiza o texto ALT/Caption
-            lbImg.alt = nodes[i].querySelector('img').alt || ''; 
+            const imgElement = nodes[i].querySelector('img');
+            lbImg.alt = imgElement ? imgElement.alt : ''; 
             lightbox.style.display='flex'; 
             current = i; 
         }
@@ -49,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function(){
         };
     });
 
-    // IMPLEMENTAÇÃO DO SWIPE/ARRRASTO (NOVO CÓDIGO AQUI)
+    // IMPLEMENTAÇÃO DO SWIPE/ARRRASTO
     let startX = 0;
 
     lightbox.addEventListener('touchstart', (e) => {
@@ -63,14 +64,14 @@ document.addEventListener('DOMContentLoaded', function(){
         // Se o movimento for maior que 50px (tolerância para um deslize intencional)
         if (lightbox.style.display === 'flex' && Math.abs(diffX) > 50) {
             if (diffX > 0) {
-                // Deslize para Esquerda (avança para a Próxima imagem)
                 current = (current + 1) % srcs.length;
             } else {
-                // Deslize para Direita (volta para a Anterior imagem)
                 current = (current - 1 + srcs.length) % srcs.length;
             }
             // Chama a função para mostrar a nova imagem
+            const imgElement = document.querySelector('a[data-gallery] img[src="' + srcs[current] + '"]');
             lbImg.src = srcs[current];
+            lbImg.alt = imgElement ? imgElement.alt : '';
         }
     });
 
@@ -88,4 +89,30 @@ document.addEventListener('DOMContentLoaded', function(){
             }
         }
     });
+
+    // ===================================================
+    // NOVO CÓDIGO: LAZY LOADING (CARREGAMENTO PREGUIÇOSO)
+    // ===================================================
+    const lazyImages = document.querySelectorAll('img[data-src]');
+
+    if ('IntersectionObserver' in window) {
+        const lazyLoadObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    img.src = img.dataset.src;
+                    img.removeAttribute('data-src');
+                    observer.unobserve(img);
+                }
+            });
+        });
+
+        lazyImages.forEach(img => lazyLoadObserver.observe(img));
+    } else {
+        // Fallback: carrega todas as imagens se o navegador for muito antigo
+        lazyImages.forEach(img => {
+            img.src = img.dataset.src;
+            img.removeAttribute('data-src');
+        });
+    }
 });
