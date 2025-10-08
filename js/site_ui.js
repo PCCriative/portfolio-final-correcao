@@ -116,3 +116,9 @@ document.addEventListener('DOMContentLoaded', function(){
         });
     }
 });
+
+/* === Bloqueio do Botão Direito para Proteger Conteúdo === */
+document.addEventListener('contextmenu', event => {
+    // Impede que o menu de contexto (botão direito) apareça
+    event.preventDefault(); 
+});
