@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Jornada 2 - 36 Fotos | Portfólio</title>
+  <title>Caminhos de uma Debutante Carioca (Parte 2) | Portfólio</title> 
   <link rel="stylesheet" href="../../css/style.css">
 </head>
 <body>
@@ -19,8 +19,10 @@
   </header>
 
   <main class="album-page">
-    <h1 style="text-align:center;">Jornada 2 - 36 Fotos</h1>
-    <section class="album-grid-images">
+
+    <h1 style="text-align:center;">Caminhos de uma Debutante Carioca (Parte 2 - 36 Fotos)</h1>
+Exportar para as Planilhas
+     <section class="album-grid-images">
           <a href="../../albums/jornada_2_fotos/jornada_2_fotos_1.jpg" data-gallery="jornada_2_fotos"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="../../albums/jornada_2_fotos/jornada_2_fotos_1.jpg" alt="Foto 1 da Jornada 2"></a>
       <a href="../../albums/jornada_2_fotos/jornada_2_fotos_2.jpg" data-gallery="jornada_2_fotos"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="../../albums/jornada_2_fotos/jornada_2_fotos_2.jpg" alt="Foto 2 da Jornada 2"></a>
       <a href="../../albums/jornada_2_fotos/jornada_2_fotos_3.jpg" data-gallery="jornada_2_fotos"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="../../albums/jornada_2_fotos/jornada_2_fotos_3.jpg" alt="Foto 3 da Jornada 2"></a>
