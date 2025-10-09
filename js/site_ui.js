@@ -6,7 +6,6 @@ document.addEventListener('DOMContentLoaded', function() {
     setupLazyLoading();
 
     // 2. Inicializa o layout Masonry APÓS TUDO CARREGAR
-    // Masonry precisa do 'load' para calcular as dimensões finais das imagens
     initializeMasonryLayout();
 
     // 3. Inicializa o filtro de álbuns (se houver)
@@ -30,7 +29,6 @@ function setupLazyLoading() {
                     
                     // Remove os atributos de placeholder após o carregamento
                     img.removeAttribute('data-src');
-                    img.removeAttribute('src'); // O src real é adicionado acima e o navegador lida com isso.
                     img.classList.remove('lazy-image');
                     
                     observer.unobserve(img);
@@ -57,7 +55,6 @@ function initializeMasonryLayout() {
     const grid = document.querySelector('.album-grid-images');
     if (grid) {
         // O Masonry deve ser inicializado APENAS DEPOIS que a página carregar (incluindo imagens).
-        // Isso garante o tamanho correto para o alinhamento.
         window.addEventListener('load', function() {
             new Masonry(grid, {
                 itemSelector: 'a', 
@@ -71,5 +68,5 @@ function initializeMasonryLayout() {
 
 // Implementação do filtro de álbuns (se houver)
 function setupAlbumFilter() {
-    // (Seu código original para o filtro de álbuns)
+    // Seu código de filtro de álbuns original (não alterado)
 }
