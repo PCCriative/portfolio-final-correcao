@@ -1,91 +1,69 @@
-document.addEventListener('DOMContentLoaded', function(){
-    // Carousel
-    const carInner = document.querySelector('.carousel-inner');
-    if(carInner){
-        const items = carInner.children;
-        let idx = 0;
-        function update(){ carInner.style.transform = 'translateX(' + (-idx*100) + '%)'; }
-        document.querySelectorAll('.carousel-button.prev').forEach(b=>b.addEventListener('click', ()=>{ idx = (idx-1+items.length)%items.length; update(); }));
-        document.querySelectorAll('.carousel-button.next').forEach(b=>b.addEventListener('click', ()=>{ idx = (idx+1)%items.length; update(); }));
-        // Inicia a troca automática apenas se houver mais de um item
-        if (items.length > 1) {
-            setInterval(()=>{ idx = (idx+1)%items.length; update(); }, 5000);
-        }
-    }
-    // Lightbox
-    const lightbox = document.createElement('div');
-    lightbox.className = 'lightbox';
-    lightbox.innerHTML = '<button class="close">✖</button><img src="" alt="view">';
-    document.body.appendChild(lightbox);
-    const lbImg = lightbox.querySelector('img');
-    const closeBtn = lightbox.querySelector('.close');
-    closeBtn.addEventListener('click', ()=> lightbox.style.display='none');
+/* eslint-disable no-undef */
+// Funções de inicialização do UI
+document.addEventListener('DOMContentLoaded', function() {
+    // 1. Inicializa o Lazy Loading
+    setupLazyLoading();
 
-    let srcs = [];
-    let current = 0;
-
-    document.body.addEventListener('click', function(e){
-        const a = e.target.closest('a[data-gallery]');
-        if(!a) return;
-        e.preventDefault();
-        const galleryName = a.getAttribute('data-gallery');
-        const nodes = Array.from(document.querySelectorAll('a[data-gallery="' + galleryName + '"]'));
-        srcs = nodes.map(n=>n.href);
-        let idx = nodes.indexOf(a);
-
-        function show(i){ 
-            lbImg.src = srcs[i]; 
-            // Atualiza o texto ALT/Caption
-            lbImg.alt = nodes[i].querySelector('img').alt || ''; 
-            lightbox.style.display='flex'; 
-            current = i; 
-        }
-        show(idx);
-
-        // Navegação ao clicar na imagem
-        lbImg.onclick = function(){ 
-            current = (current+1) % srcs.length; 
-            show(current); 
-        };
+    // 2. Inicializa o Fancybox para galerias de imagens (se houver)
+    // Fancybox já deve ser carregado via CDN no HTML
+    
+    // 3. Inicializa o layout Masonry APÓS TUDO CARREGAR
+    // Isso garante que o script calcule o alinhamento correto das imagens.
+    window.addEventListener('load', function() {
+        initializeMasonryLayout();
     });
 
-    // IMPLEMENTAÇÃO DO SWIPE/ARRRASTO (NOVO CÓDIGO AQUI)
-    let startX = 0;
-
-    lightbox.addEventListener('touchstart', (e) => {
-        startX = e.touches[0].clientX;
-    });
-
-    lightbox.addEventListener('touchend', (e) => {
-        const endX = e.changedTouches[0].clientX;
-        const diffX = startX - endX;
-
-        // Se o movimento for maior que 50px (tolerância para um deslize intencional)
-        if (lightbox.style.display === 'flex' && Math.abs(diffX) > 50) {
-            if (diffX > 0) {
-                // Deslize para Esquerda (avança para a Próxima imagem)
-                current = (current + 1) % srcs.length;
-            } else {
-                // Deslize para Direita (volta para a Anterior imagem)
-                current = (current - 1 + srcs.length) % srcs.length;
-            }
-            // Chama a função para mostrar a nova imagem
-            lbImg.src = srcs[current];
-        }
-    });
-
-    // Suporte a navegação por teclado (Esc, Seta Esquerda/Direita)
-    document.addEventListener('keydown', function(e){
-        if(lightbox.style.display === 'flex'){
-            if(e.key === 'ArrowLeft'){ // Seta Esquerda
-                current = (current-1 + srcs.length) % srcs.length;
-                lbImg.src = srcs[current];
-            } else if(e.key === 'ArrowRight'){ // Seta Direita
-                current = (current+1) % srcs.length;
-                lbImg.src = srcs[current];
-            } else if(e.key === 'Escape'){ // Tecla ESC
-                lightbox.style.display = 'none';
-            }
-        }
-    });
+    // 4. Inicializa o filtro de álbuns (se houver)
+    setupAlbumFilter();
 });
+
+// Implementação do Lazy Loading para todas as imagens com a classe lazy-image
+function setupLazyLoading() {
+    const lazyImages = document.querySelectorAll('.lazy-image');
+    
+    // Fallback para navegadores sem Intersection Observer
+    if (!('IntersectionObserver' in window)) {
+        lazyImages.forEach(img => {
+            img.src = img.dataset.src;
+            img.classList.remove('lazy-image');
+        });
+        return;
+    }
+
+    const imageObserver = new IntersectionObserver(function(entries, observer) {
+        entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                img.src = img.dataset.src;
+                img.classList.remove('lazy-image');
+                observer.unobserve(img);
+            }
+        });
+    });
+
+    lazyImages.forEach(function(img) {
+        imageObserver.observe(img);
+    });
+}
+
+// Implementação do Layout Masonry (Galeria de Imagens)
+function initializeMasonryLayout() {
+    const grid = document.querySelector('.album-grid-images');
+    if (grid) {
+        new Masonry(grid, {
+            itemSelector: 'a', // Seleciona os links <a> que envolvem as imagens
+            columnWidth: 'a',
+            gutter: 10,
+            percentPosition: true
+        });
+    }
+    
+    // Tenta inicializar o Fancybox novamente se necessário, após o layout
+    // Fancybox.bind('[data-gallery="aniversario_maria_clara"]'); 
+    // Outras inicializações de lightbox aqui
+}
+
+// Implementação do filtro de álbuns (se houver)
+function setupAlbumFilter() {
+    // Código do filtro (se houver)
+}
