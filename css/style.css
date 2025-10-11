@@ -78,7 +78,8 @@ header nav a {
 .carousel-inner {
     display: flex;
     transition: transform .5s ease;
-    height: 420px; /* Altura corrigida para o carrossel */
+    /* CORREÇÃO: Aumenta a altura para um bom tamanho e força a aplicação */
+    height: 500px !important; 
 }
 .carousel-item {
     min-width: 100%;
@@ -287,3 +288,5 @@ header nav a {
 }
 
 /* --- FIM DO OVERRIDE --- */
+
+
