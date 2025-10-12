@@ -1,20 +1,24 @@
-document.addEventListener('DOMContentLoaded', function() {
+// Funções de inicialização do UI
+// Usa 'load' para garantir que TUDO, incluindo Lightbox e Masonry, rode por último
+window.addEventListener('load', function() {
     // 1. Inicializa o Lazy Loading
     setupLazyLoading();
 
-    // ** NOVO: INICIALIZAÇÃO DO LIGHTBOX PRIMEIRO (Para evitar conflitos) **
-    setupLightbox(); 
+    // 2. Tenta o Lightbox AGORA, depois que todos os elementos estão na tela
+    setupLightbox();
 
-    // 2. Chamada para o carrossel 
-    initializeCarousel(); 
-
-    // 3. Inicializa o layout Masonry APÓS TUDO CARREGAR
+    // 3. Inicializa o layout Masonry
     initializeMasonryLayout();
-
-    // 4. Inicializa o filtro de álbuns (se houver)
+    
+    // 4. Inicializa o carrossel
+    initializeCarousel(); 
+    
+    // 5. Inicializa o filtro de álbuns (se houver)
     setupAlbumFilter();
 });
 
+// A função document.addEventListener('DOMContentLoaded' que estava antes deve ser removida ou comentada.
+// Caso seu arquivo não esteja usando window.addEventListener('load') em outro lugar.
 
 // Implementação do Lazy Loading para todas as imagens com data-src
 function setupLazyLoading() {
