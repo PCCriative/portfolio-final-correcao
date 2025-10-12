@@ -111,7 +111,6 @@ header nav a {
 
 /* CORREÇÃO DO LAYOUT: GALERIAS DE FOTOS (Álbuns e sobre.html) */
 
-
 /* 1. Contêiner Principal: Usa Flexbox para criar linhas e limita o tamanho MÁXIMO */
 .photo-grid, .album-grid-images { 
     display: flex;
@@ -125,12 +124,6 @@ header nav a {
     margin: 0 auto; 
 }
 
-    /* CORREÇÃO FINAL PARA O ESTOURO DE TELA: */
-    max-width: 1200px; /* Limita a largura do container principal */
-    margin: 0 auto; /* Centraliza o container na tela */
-}
-
-
 /* 2. Item da Grade (grid-item): DEFINIÇÃO ROBUSTA DE LARGURA */
 .album-grid-images .grid-item {
     /* Define o tamanho base de 300px, mas permite que ocupe menos (shrink) */
@@ -141,17 +134,16 @@ header nav a {
 
 /* 3. Estilo da Miniatura: GARANTIA DE LARGURA MÁXIMA E ANULAÇÃO DE ESTILOS CONFLITANTES */
 .photo-grid img, .album-grid-images img {
-    /* Correção Extrema */
+    /* Correção Extrema para garantir que a largura da imagem não exceda o contêiner. */
     width: 100% !important; /* Deve ocupar 100% do contêiner flexível */
     max-width: 300px !important; /* Limite MÁXIMO da largura */
-
+    
     height: 200px !important; /* Altura fixa */
     object-fit: cover !important;
     border-radius: 4px;
     transition: transform .3s ease;
     border: 2px solid #d4af37;
 }
-
 
 /* 4. Mantenha a regra original de hover */
 .album-grid-images img:hover {
