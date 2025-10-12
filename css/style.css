@@ -110,7 +110,8 @@ header nav a {
 }
 
 /* CORREÇÃO DO LAYOUT: GALERIAS DE FOTOS (Álbuns e sobre.html) */
-/* Este bloco foi corrigido para usar o grid-item e garantir 3 colunas limpas */
+
+/* 1. Contêiner Principal: Usa Flexbox para criar linhas */
 .photo-grid, .album-grid-images { 
     display: flex;
     flex-wrap: wrap;
@@ -119,10 +120,11 @@ header nav a {
     padding: 20px;
 }
 
-/* 2. Item da Grade (grid-item): Define a largura para 3 colunas */
+/* 2. Item da Grade (grid-item): Definição de largura FINAL */
 .album-grid-images .grid-item {
-    /* Define a largura para 3 colunas, levando em conta o gap de 10px do contêiner */
-    width: calc(33.333% - 7px); 
+    /* Define um tamanho flexível e o limite MÁXIMO de 300px para evitar estouro de tela */
+    flex-grow: 1; /* Permite que o item cresça para preencher o espaço */
+    max-width: 300px; /* IMPEDE que o item fique maior que 300px, resolvendo o problema de tela cheia */
     margin-bottom: 10px;
 }
 
@@ -264,14 +266,13 @@ header nav a {
 
 /* Correção do Carrossel: Usando altura flexível para impedir distorção */
 .carousel-inner {
-    /* Removendo height: 420px !important; para flexibilizar a altura */
-    height: auto !important; /* Permite que o conteúdo defina a altura */
-    max-height: 480px !important; /* Limite máximo para não ficar gigante */
+    height: auto !important;
+    max-height: 480px !important;
 }
 .carousel-item img {
     width: 100% !important;
-    height: auto !important; /* Permite que o CSS calcule a altura correta */
-    object-fit: contain !important; /* Comando para não distorcer a foto */
+    height: auto !important;
+    object-fit: contain !important;
     max-height: 480px !important;
 }
 
@@ -358,20 +359,3 @@ header nav a {
         flex-basis: 100% !important;
     }
 }
-
-
-/* AJUSTE CIRÚRGICO: FORÇA O TAMANHO MÁXIMO DA IMAGEM E DO LINK */
-
-/* Garante que o item da grade não ultrapasse o tamanho do seu container */
-.album-grid-images .grid-item {
-    box-sizing: border-box !important; /* Garante que padding e border não causem estouro */
-    padding: 0 5px; /* Adiciona um pequeno padding para espaço entre as colunas */
-}
-
-/* Garante que a imagem se ajuste ao 100% da largura máxima permitida */
-.album-grid-images img {
-    max-width: 100% !important; /* IMPEDE que a imagem seja maior que 100% de seu item */
-    height: auto !important; /* Permite que a altura se ajuste, evitando o esticamento */
-}
-
-
