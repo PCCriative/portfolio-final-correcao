@@ -1,9 +1,13 @@
 /* eslint-disable no-undef */
 
 // Funções de inicialização do UI
+
 document.addEventListener('DOMContentLoaded', function() {
     // 1. Inicializa o Lazy Loading
     setupLazyLoading();
+
+    // ** LINHA ADICIONAL OBRIGATÓRIA AQUI! **
+    initializeCarousel(); 
 
     // 2. Inicializa o layout Masonry APÓS TUDO CARREGAR
     initializeMasonryLayout();
@@ -69,4 +73,73 @@ function initializeMasonryLayout() {
 // Implementação do filtro de álbuns (se houver)
 function setupAlbumFilter() {
     // Seu código de filtro de álbuns original (não alterado)
+}
+// NOVO CÓDIGO: Inicialização e Lógica do Carrossel (Slideshow)
+function initializeCarousel() {
+    const carousel = document.querySelector('.carousel');
+    if (!carousel) return;
+
+    const inner = carousel.querySelector('.carousel-inner');
+    const items = carousel.querySelectorAll('.carousel-item');
+    
+    // Assegura que o HTML tem as classes 'prev' e 'next' nos botões de navegação
+    const prevButton = carousel.querySelector('.prev'); 
+    const nextButton = carousel.querySelector('.next'); 
+
+    // Garante que o primeiro item está visível e ativo (essencial para o CSS/layout)
+    if (items.length > 0) {
+        items[0].classList.add('active');
+    }
+
+    let currentIndex = 0;
+
+    function updateCarousel() {
+        if (items.length === 0) return;
+        
+        // Lógica de Rotação
+        const itemWidth = items[0].clientWidth;
+        inner.style.transform = `translateX(${-currentIndex * itemWidth}px)`;
+        
+        // Aplica o Lazy Loading para a foto atual
+        loadItemImage(items[currentIndex]);
+    }
+
+    function goToSlide(index) {
+        currentIndex = (index + items.length) % items.length; // Garante o loop
+        updateCarousel();
+    }
+    
+    // Função local de Lazy Loading para a imagem de capa (se usar data-src)
+    function loadItemImage(item) {
+        const img = item.querySelector('img');
+        if (img && img.dataset.src) {
+            img.src = img.dataset.src;
+            img.removeAttribute('data-src'); 
+        }
+    }
+
+    // Conecta a Navegação se os botões existirem
+    if (prevButton && nextButton) {
+        prevButton.addEventListener('click', () => {
+            goToSlide(currentIndex - 1);
+        });
+
+        nextButton.addEventListener('click', () => {
+            goToSlide(currentIndex + 1);
+        });
+    }
+
+    // Inicia o Carrossel
+    window.addEventListener('resize', updateCarousel);
+    
+    // Carrega a primeira imagem imediatamente
+    items.forEach(loadItemImage); 
+    
+    // Inicializa o posicionamento
+    updateCarousel();
+
+    // Opcional: Auto-play
+    setInterval(() => {
+        goToSlide(currentIndex + 1);
+    }, 5000); 
 }
