@@ -1,24 +1,20 @@
-
-/* eslint-disable no-undef */
-
-// Funções de inicialização do UI
-
 document.addEventListener('DOMContentLoaded', function() {
     // 1. Inicializa o Lazy Loading
     setupLazyLoading();
 
-    // ** LINHA DO CARROSSEL JÁ ADICIONADA: **
+    // ** NOVO: INICIALIZAÇÃO DO LIGHTBOX PRIMEIRO (Para evitar conflitos) **
+    setupLightbox(); 
+
+    // 2. Chamada para o carrossel 
     initializeCarousel(); 
 
-    // ** LINHA DO LIGHTBOX A SER ADICIONADA: **
-    setupLightbox();
-
-    // 2. Inicializa o layout Masonry APÓS TUDO CARREGAR
+    // 3. Inicializa o layout Masonry APÓS TUDO CARREGAR
     initializeMasonryLayout();
 
-    // 3. Inicializa o filtro de álbuns (se houver)
+    // 4. Inicializa o filtro de álbuns (se houver)
     setupAlbumFilter();
 });
+
 
 // Implementação do Lazy Loading para todas as imagens com data-src
 function setupLazyLoading() {
