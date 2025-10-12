@@ -124,12 +124,15 @@ header nav a {
     margin: 0 auto; /* Centraliza o container na tela */
 }
 
-/* 2. Item da Grade (grid-item): Definição de largura FINAL */
+/* 2. Item da Grade (grid-item): CORREÇÃO EXTREMA DE LARGURA */
 .album-grid-images .grid-item {
-    /* Define um tamanho flexível e o limite MÁXIMO de 300px para evitar estouro de tela */
-    flex-grow: 1; /* Permite que o item cresça para preencher o espaço */
-    max-width: 300px; /* IMPEDE que o item fique maior que 300px, resolvendo o problema de tela cheia */
+    /* Garante que o item ocupe um espaço igual ou menor que 300px */
+    flex-grow: 1; 
+    max-width: 300px !important; /* FORÇA o limite máximo de 300px */
     margin-bottom: 10px;
+
+    /* Garante que a largura base seja pequena, permitindo o Flexbox reorganizar */
+    flex-basis: 300px !important; 
 }
 
 /* 3. Estilo da Miniatura: Garante o tamanho e proporção */
