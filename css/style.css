@@ -111,13 +111,17 @@ header nav a {
 
 /* CORREÇÃO DO LAYOUT: GALERIAS DE FOTOS (Álbuns e sobre.html) */
 
-/* 1. Contêiner Principal: Usa Flexbox para criar linhas */
+/* 1. Contêiner Principal: Usa Flexbox para criar linhas e limita o tamanho MÁXIMO */
 .photo-grid, .album-grid-images { 
     display: flex;
     flex-wrap: wrap;
     gap: 10px; /* Espaço entre as fotos */
     justify-content: center;
     padding: 20px;
+    
+    /* CORREÇÃO FINAL PARA O ESTOURO DE TELA: */
+    max-width: 1200px; /* Limita a largura do container principal */
+    margin: 0 auto; /* Centraliza o container na tela */
 }
 
 /* 2. Item da Grade (grid-item): Definição de largura FINAL */
