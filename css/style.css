@@ -358,3 +358,20 @@ header nav a {
         flex-basis: 100% !important;
     }
 }
+
+
+/* AJUSTE CIRÚRGICO: FORÇA O TAMANHO MÁXIMO DA IMAGEM E DO LINK */
+
+/* Garante que o item da grade não ultrapasse o tamanho do seu container */
+.album-grid-images .grid-item {
+    box-sizing: border-box !important; /* Garante que padding e border não causem estouro */
+    padding: 0 5px; /* Adiciona um pequeno padding para espaço entre as colunas */
+}
+
+/* Garante que a imagem se ajuste ao 100% da largura máxima permitida */
+.album-grid-images img {
+    max-width: 100% !important; /* IMPEDE que a imagem seja maior que 100% de seu item */
+    height: auto !important; /* Permite que a altura se ajuste, evitando o esticamento */
+}
+
+
