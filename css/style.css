@@ -332,4 +332,26 @@ header nav a {
     height: 100%;
 }
 
+/* Correção do Layout de Múltiplas Colunas para a Galeria de Álbuns */
+.album-grid-images {
+    /* Usa o CSS Columns para criar o layout de tijolos (Masonry) */
+    column-count: 3; /* Tenta 3 colunas. Você pode ajustar esse número. */
+    column-gap: 15px; /* Espaço entre as colunas */
+    margin: 20px 0; /* Margem padrão */
+}
+
+/* Garante que o item da grade não quebre entre as colunas */
+.album-grid-images .grid-item {
+    display: inline-block; /* Crucial para o layout de colunas funcionar */
+    width: 100%; /* O item deve ocupar 100% da largura da coluna */
+    margin-bottom: 15px; /* Espaço na vertical entre as fotos */
+}
+
+/* Garante que a imagem se ajuste ao seu contêiner (grid-item) */
+.album-grid-images img {
+    width: 100%;
+    height: auto;
+    display: block; /* Remove possíveis espaços em branco */
+}
+
 
