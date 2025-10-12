@@ -111,6 +111,7 @@ header nav a {
 
 /* CORREÇÃO DO LAYOUT: GALERIAS DE FOTOS (Álbuns e sobre.html) */
 
+
 /* 1. Contêiner Principal: Usa Flexbox para criar linhas e limita o tamanho MÁXIMO */
 .photo-grid, .album-grid-images { 
     display: flex;
@@ -119,21 +120,26 @@ header nav a {
     justify-content: center;
     padding: 20px;
     
+    /* CORREÇÃO CRÍTICA: Limita a largura do contêiner e centraliza-o */
+    max-width: 1200px; 
+    margin: 0 auto; 
+}
+
     /* CORREÇÃO FINAL PARA O ESTOURO DE TELA: */
     max-width: 1200px; /* Limita a largura do container principal */
     margin: 0 auto; /* Centraliza o container na tela */
 }
 
-/* 2. Item da Grade (grid-item): CORREÇÃO EXTREMA DE LARGURA */
-.album-grid-images .grid-item {
-    /* Garante que o item ocupe um espaço igual ou menor que 300px */
-    flex-grow: 1; 
-    max-width: 300px !important; /* FORÇA o limite máximo de 300px */
-    margin-bottom: 10px;
 
-    /* Garante que a largura base seja pequena, permitindo o Flexbox reorganizar */
-    flex-basis: 300px !important; 
+/* 2. Item da Grade (grid-item): DEFINIÇÃO ROBUSTA DE LARGURA */
+.album-grid-images .grid-item {
+    /* Define o tamanho base de 300px, mas permite que ocupe menos (shrink) */
+    flex: 0 1 300px; /* flex-grow:0, flex-shrink:1, flex-basis:300px */
+    max-width: 300px; /* Limite MÁXIMO de 300px */
+    margin-bottom: 10px;
 }
+
+
 
 /* 3. Estilo da Miniatura: Garante o tamanho e proporção */
 .photo-grid img, .album-grid-images img {
