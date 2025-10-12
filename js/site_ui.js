@@ -8,7 +8,9 @@ window.addEventListener('load', function() {
     setupLightbox();
 
     // 3. Inicializa o layout Masonry
-    initializeMasonryLayout();
+    // initializeMasonryLayout(); // <--- DESATIVADO!
+
+
     
     // 4. Inicializa o carrossel
     initializeCarousel(); 
