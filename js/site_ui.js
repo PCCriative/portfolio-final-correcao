@@ -1,3 +1,4 @@
+
 /* eslint-disable no-undef */
 
 // Funções de inicialização do UI
@@ -6,8 +7,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // 1. Inicializa o Lazy Loading
     setupLazyLoading();
 
-    // ** LINHA ADICIONAL OBRIGATÓRIA AQUI! **
+    // ** LINHA DO CARROSSEL JÁ ADICIONADA: **
     initializeCarousel(); 
+
+    // ** LINHA DO LIGHTBOX A SER ADICIONADA: **
+    setupLightbox();
 
     // 2. Inicializa o layout Masonry APÓS TUDO CARREGAR
     initializeMasonryLayout();
@@ -142,4 +146,85 @@ function initializeCarousel() {
     setInterval(() => {
         goToSlide(currentIndex + 1);
     }, 5000); 
+}
+
+
+// NOVO CÓDIGO: Inicialização e Lógica do Lightbox com Navegação
+function setupLightbox() {
+    const lightbox = document.querySelector('.lightbox');
+    const lightboxImg = lightbox ? lightbox.querySelector('img') : null;
+    const closeButton = lightbox ? lightbox.querySelector('.close') : null;
+    
+    // Cria os botões de navegação no JavaScript
+    const prevButton = document.createElement('button');
+    prevButton.innerHTML = '❮';
+    prevButton.className = 'lightbox-nav prev-lightbox';
+    
+    const nextButton = document.createElement('button');
+    nextButton.innerHTML = '❯';
+    nextButton.className = 'lightbox-nav next-lightbox';
+
+    let currentImages = []; // Array de URLs das fotos do álbum atual
+    let currentIndex = 0;   // Índice da foto atual
+
+    if (lightbox) {
+        // Anexa os botões ao Lightbox
+        lightbox.appendChild(prevButton);
+        lightbox.appendChild(nextButton);
+    }
+    
+    // Função para abrir o lightbox
+    document.querySelectorAll('.photo-grid a, .album-grid-images a').forEach((link) => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // 1. Coleta todas as URLs do álbum clicado
+            const parentGrid = link.closest('.photo-grid') || link.closest('.album-grid-images');
+            currentImages = Array.from(parentGrid.querySelectorAll('a')).map(a => a.href);
+            
+            // 2. Encontra o índice da foto clicada
+            currentIndex = currentImages.indexOf(this.href);
+
+            // 3. Abre a foto no Lightbox
+            showImage(currentIndex);
+            
+            lightbox.style.display = 'flex';
+        });
+    });
+
+    // Função para exibir uma imagem específica
+    function showImage(index) {
+        if (lightboxImg && currentImages.length > 0) {
+            // Garante o loop
+            currentIndex = (index + currentImages.length) % currentImages.length;
+            if (currentIndex < 0) {
+                 currentIndex = currentImages.length - 1;
+            }
+
+            lightboxImg.src = currentImages[currentIndex];
+        }
+    }
+
+    // Navegação (Próxima/Anterior)
+    prevButton.addEventListener('click', () => {
+        showImage(currentIndex - 1);
+    });
+
+    nextButton.addEventListener('click', () => {
+        showImage(currentIndex + 1);
+    });
+
+    // Fechar o Lightbox
+    if (closeButton) {
+        closeButton.addEventListener('click', () => {
+            lightbox.style.display = 'none';
+        });
+    }
+
+    // Fechar com a tecla ESC
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && lightbox && lightbox.style.display === 'flex') {
+            lightbox.style.display = 'none';
+        }
+    });
 }

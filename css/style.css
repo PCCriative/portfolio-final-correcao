@@ -289,4 +289,29 @@ header nav a {
 
 /* --- FIM DO OVERRIDE --- */
 
+/* CSS para Botões de Navegação do Lightbox */
+.lightbox-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    border: none;
+    font-size: 2rem;
+    padding: 10px 15px;
+    cursor: pointer;
+    z-index: 10000; /* Acima da imagem */
+    user-select: none;
+    transition: background 0.2s;
+}
+.lightbox-nav:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+.lightbox-nav.prev-lightbox {
+    left: 20px;
+}
+.lightbox-nav.next-lightbox {
+    right: 20px;
+}
+
 
