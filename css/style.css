@@ -336,3 +336,25 @@ header nav a {
     width: 100%;
     height: 100%;
 }
+
+/* AJUSTES FINAIS DE RESPONSIVIDADE PARA MINIATURAS */
+
+/* 1. Para telas médias (Tablets e Notebooks) - 2 Colunas */
+@media (max-width: 900px) {
+    .album-grid-images .grid-item {
+        /* Define 2 colunas */
+        width: calc(50% - 10px);
+    }
+}
+
+/* 2. Para telas pequenas (Celulares) - 1 Coluna */
+@media (max-width: 600px) {
+    .album-grid-images .grid-item {
+        /* Define 1 coluna (tamanho total) */
+        width: 100%;
+    }
+    /* Corrige o layout da página Sobre Mim em celulares */
+    .sobre-container .photo-grid a {
+        flex-basis: 100% !important;
+    }
+}
