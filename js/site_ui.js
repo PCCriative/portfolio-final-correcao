@@ -7,8 +7,8 @@ window.addEventListener('load', function() {
     // 2. Tenta o Lightbox AGORA, depois que todos os elementos estão na tela
     setupLightbox();
     
-    // 3. Inicializa o carrossel
-    initializeCarousel(); 
+    // 3. Inicializa o carrossel com um pequeno atraso para garantir o cálculo correto da largura (fix de 0px)
+    setTimeout(initializeCarousel, 50); 
     
     // 4. Inicializa o filtro de álbuns (se houver)
     setupAlbumFilter();
@@ -211,16 +211,4 @@ function setupLightbox() {
     });
 
     // Fechar o Lightbox
-    if (closeButton) {
-        closeButton.addEventListener('click', () => {
-            lightbox.style.display = 'none';
-        });
-    }
-
-    // Fechar com a tecla ESC
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && lightbox && lightbox.style.display === 'flex') {
-            lightbox.style.display = 'none';
-        }
-    });
-}
+    if
