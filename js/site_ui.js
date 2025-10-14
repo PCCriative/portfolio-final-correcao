@@ -96,9 +96,8 @@ function initializeCarousel() {
     function updateCarousel() {
         if (items.length === 0) return;
         
-        // Lógica de Rotação
-        // Se o item ainda não tem largura (não carregou), usamos um valor padrão.
-        const itemWidth = items[0].clientWidth || carousel.clientWidth; 
+        // CORREÇÃO CRÍTICA: Força o itemWidth a ser a largura do contêiner
+        const itemWidth = carousel.clientWidth;
         inner.style.transform = `translateX(${-currentIndex * itemWidth}px)`;
         
         // Aplica o Lazy Loading APENAS para a foto atual
