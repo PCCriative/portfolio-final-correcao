@@ -77,12 +77,16 @@ header nav a {
 }
 .carousel-inner {
     display: flex;
+    /* CORREÇÃO CRÍTICA: Impede que os itens quebrem a linha */
+    flex-wrap: nowrap; 
     transition: transform .5s ease;
     height: 500px !important; 
 }
 .carousel-item {
     min-width: 100%;
     box-sizing: border-box;
+    /* Adicionado para reforçar que não deve encolher ou crescer */
+    flex: 0 0 100%;
 }
 .carousel img {
     width: 100%;
@@ -112,42 +116,42 @@ header nav a {
 /* CORREÇÃO DO LAYOUT: GALERIAS DE FOTOS (Álbuns e sobre.html) */
 
 /* 1. Contêiner Principal: Usa Flexbox para criar linhas e limita o tamanho MÁXIMO */
-.photo-grid, .album-grid-images { 
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px; /* Espaço entre as fotos */
-    justify-content: center;
-    padding: 20px;
-    
-    /* CORREÇÃO CRÍTICA: Limita a largura do contêiner e centraliza-o */
-    max-width: 1200px; 
-    margin: 0 auto; 
+.photo-grid, .album-grid-images { 
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; /* Espaço entre as fotos */
+    justify-content: center;
+    padding: 20px;
+    
+    /* CORREÇÃO CRÍTICA: Limita a largura do contêiner e centraliza-o */
+    max-width: 1200px; 
+    margin: 0 auto; 
 }
 
 /* 2. Item da Grade (grid-item): DEFINIÇÃO ROBUSTA DE LARGURA */
 .album-grid-images .grid-item {
-    /* Define o tamanho base de 300px, mas permite que ocupe menos (shrink) */
-    flex: 0 1 300px; /* flex-grow:0, flex-shrink:1, flex-basis:300px */
-    max-width: 300px; /* Limite MÁXIMO de 300px */
-    margin-bottom: 10px;
+    /* Define o tamanho base de 300px, mas permite que ocupe menos (shrink) */
+    flex: 0 1 300px; /* flex-grow:0, flex-shrink:1, flex-basis:300px */
+    max-width: 300px; /* Limite MÁXIMO de 300px */
+    margin-bottom: 10px;
 }
 
 /* 3. Estilo da Miniatura: GARANTIA DE LARGURA MÁXIMA E ANULAÇÃO DE ESTILOS CONFLITANTES */
 .photo-grid img, .album-grid-images img {
-    /* Correção Extrema para garantir que a largura da imagem não exceda o contêiner. */
-    width: 100% !important; /* Deve ocupar 100% do contêiner flexível */
-    max-width: 300px !important; /* Limite MÁXIMO da largura */
-    
-    height: 200px !important; /* Altura fixa */
-    object-fit: cover !important;
-    border-radius: 4px;
-    transition: transform .3s ease;
-    border: 2px solid #d4af37;
+    /* Correção Extrema para garantir que a largura da imagem não exceda o contêiner. */
+    width: 100% !important; /* Deve ocupar 100% do contêiner flexível */
+    max-width: 300px !important; /* Limite MÁXIMO da largura */
+    
+    height: 200px !important; /* Altura fixa */
+    object-fit: cover !important;
+    border-radius: 4px;
+    transition: transform .3s ease;
+    border: 2px solid #d4af37;
 }
 
 /* 4. Mantenha a regra original de hover */
 .album-grid-images img:hover {
-    transform: scale(1.03);
+    transform: scale(1.03);
 }
 
 
@@ -349,20 +353,20 @@ header nav a {
 
 /* 1. Para telas médias (Tablets e Notebooks) - 2 Colunas */
 @media (max-width: 900px) {
-    .album-grid-images .grid-item {
-        /* Define 2 colunas */
-        width: calc(50% - 10px);
-    }
+    .album-grid-images .grid-item {
+        /* Define 2 colunas */
+        width: calc(50% - 10px);
+    }
 }
 
 /* 2. Para telas pequenas (Celulares) - 1 Coluna */
 @media (max-width: 600px) {
-    .album-grid-images .grid-item {
-        /* Define 1 coluna (tamanho total) */
-        width: 100%;
-    }
-    /* Corrige o layout da página Sobre Mim em celulares */
-    .sobre-container .photo-grid a {
-        flex-basis: 100% !important;
-    }
+    .album-grid-images .grid-item {
+        /* Define 1 coluna (tamanho total) */
+        width: 100%;
+    }
+    /* Corrige o layout da página Sobre Mim em celulares */
+    .sobre-container .photo-grid a {
+        flex-basis: 100% !important;
+    }
 }
