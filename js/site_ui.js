@@ -8,7 +8,7 @@ window.addEventListener('load', function() {
     setupLightbox();
     
     // 3. Inicializa o carrossel com um pequeno atraso para garantir o cálculo correto da largura (fix de 0px)
-    setTimeout(initializeCarousel, 50); 
+    setTimeout(initializeCarousel, 50); 
     
     // 4. Inicializa o filtro de álbuns (se houver)
     setupAlbumFilter();
@@ -96,119 +96,12 @@ function initializeCarousel() {
     function updateCarousel() {
         if (items.length === 0) return;
         
-        // CORREÇÃO CRÍTICA: Força o itemWidth a ser a largura do contêiner
-        const itemWidth = carousel.clientWidth;
+        // CORREÇÃO FINAL: Usando getBoundingClientRect() para garantir a largura real
+        const itemWidth = carousel.getBoundingClientRect().width;
         inner.style.transform = `translateX(${-currentIndex * itemWidth}px)`;
         
         // Aplica o Lazy Loading APENAS para a foto atual
         loadItemImage(items[currentIndex]);
     }
 
-    function goToSlide(index) {
-        currentIndex = (index + items.length) % items.length; // Garante o loop
-        updateCarousel();
-    }
-    
-    // Função local de Lazy Loading para a imagem de capa (se usar data-src)
-    function loadItemImage(item) {
-        const img = item.querySelector('img');
-        if (img && img.dataset.src) {
-            img.src = img.dataset.src;
-            img.removeAttribute('data-src'); 
-        }
-    }
-
-    // Conecta a Navegação se os botões existirem
-    if (prevButton && nextButton) {
-        prevButton.addEventListener('click', () => {
-            goToSlide(currentIndex - 1);
-        });
-
-        nextButton.addEventListener('click', () => {
-            goToSlide(currentIndex + 1);
-        });
-    }
-
-    // Inicia o Carrossel
-    window.addEventListener('resize', updateCarousel);
-    
-    // Carrega APENAS a primeira imagem imediatamente
-    loadItemImage(items[0]);
-    
-    // Inicializa o posicionamento
-    updateCarousel();
-
-    // Opcional: Auto-play
-    setInterval(() => {
-        goToSlide(currentIndex + 1);
-    }, 5000); 
-}
-
-
-// NOVO CÓDIGO: Inicialização e Lógica do Lightbox com Navegação
-function setupLightbox() {
-    const lightbox = document.querySelector('.lightbox');
-    const lightboxImg = lightbox ? lightbox.querySelector('img') : null;
-    const closeButton = lightbox ? lightbox.querySelector('.close') : null;
-    
-    // Cria os botões de navegação no JavaScript
-    const prevButton = document.createElement('button');
-    prevButton.innerHTML = '❮';
-    prevButton.className = 'lightbox-nav prev-lightbox';
-    
-    const nextButton = document.createElement('button');
-    nextButton.innerHTML = '❯';
-    nextButton.className = 'lightbox-nav next-lightbox';
-
-    let currentImages = []; // Array de URLs das fotos do álbum atual
-    let currentIndex = 0;   // Índice da foto atual
-
-    if (lightbox) {
-        // Anexa os botões ao Lightbox
-        lightbox.appendChild(prevButton);
-        lightbox.appendChild(nextButton);
-    }
-    
-    // Função para abrir o lightbox
-    document.querySelectorAll('.photo-grid a, .album-grid-images a').forEach((link) => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            // 1. Coleta todas as URLs do álbum clicado
-            const parentGrid = link.closest('.photo-grid') || link.closest('.album-grid-images');
-            currentImages = Array.from(parentGrid.querySelectorAll('a')).map(a => a.href);
-            
-            // 2. Encontra o índice da foto clicada
-            currentIndex = currentImages.indexOf(this.href);
-
-            // 3. Abre a foto no Lightbox
-            showImage(currentIndex);
-            
-            lightbox.style.display = 'flex';
-        });
-    });
-
-    // Função para exibir uma imagem específica
-    function showImage(index) {
-        if (lightboxImg && currentImages.length > 0) {
-            // Garante o loop
-            currentIndex = (index + currentImages.length) % currentImages.length;
-            if (currentIndex < 0) {
-                 currentIndex = currentImages.length - 1;
-            }
-
-            lightboxImg.src = currentImages[currentIndex];
-        }
-    }
-
-    // Navegação (Próxima/Anterior)
-    prevButton.addEventListener('click', () => {
-        showImage(currentIndex - 1);
-    });
-
-    nextButton.addEventListener('click', () => {
-        showImage(currentIndex + 1);
-    });
-
-    // Fechar o Lightbox
-    if
+    function
