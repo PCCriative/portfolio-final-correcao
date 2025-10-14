@@ -78,15 +78,15 @@ header nav a {
 .carousel-inner {
     display: flex;
     /* CORREÇÃO CRÍTICA: Impede que os itens quebrem a linha */
-    flex-wrap: nowrap; 
+    flex-wrap: nowrap; 
     transition: transform .5s ease;
     height: 500px !important; 
 }
 .carousel-item {
     min-width: 100%;
     box-sizing: border-box;
-    /* Adicionado para reforçar que não deve encolher ou crescer */
-    flex: 0 0 100%;
+    /* Adicionado para reforçar que não deve encolher ou crescer */
+    flex: 0 0 100%;
 }
 .carousel img {
     width: 100%;
@@ -275,17 +275,6 @@ header nav a {
 }
 /* --- FIM DOS AJUSTES --- */
 
-/* Correção do Carrossel: Usando altura flexível para impedir distorção */
-.carousel-inner {
-    height: auto !important;
-    max-height: 480px !important;
-}
-.carousel-item img {
-    width: 100% !important;
-    height: auto !important;
-    object-fit: contain !important;
-    max-height: 480px !important;
-}
 
 /* BORDA OURO FINAL E DEFINITIVA */
 /* Aplica a borda a todos os cartões de álbum e todas as fotos de grade, com força total. */
